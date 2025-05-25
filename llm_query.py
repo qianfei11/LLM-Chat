@@ -41,8 +41,8 @@ print(response.choices[0].message.content)
 """
 
 
-class QueryChatGPT:
-    """Interface for interacting with ChatGPT"""
+class QueryChat:
+    """Interface for interacting with LLM"""
 
     def __init__(self) -> None:
         self.chat_context: List[Dict[str, str]] = []
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     else:
         system_prompt = "You are a helpful assistant"
     # 创建查询LLM的实例
-    q = QueryChatGPT()
+    q = QueryChat()
     q.insert_system_prompt(system_prompt)
     # 获取查询结果
     print("Give me your prompt: ")
