@@ -2,3 +2,4 @@ config.ini
 .venv
 chat_log.json
 config.py
+__pycache__/

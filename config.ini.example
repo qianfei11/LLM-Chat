@@ -1,0 +1,5 @@
+# config.ini
+[DeepSeek]
+api_key = your_api_key_here       # 替换为你的 DeepSeek API 密钥
+api_base = https://api.deepseek.com  # DeepSeek API 基础地址
+model = deepseek-chat              # 使用的模型名称

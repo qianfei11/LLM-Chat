@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 
+import sys
 from llm_query import QueryChat
 from config import *
 
 num_people = len(peoples)
 
 system_prompt = """
-...
-"""
-
-query_prompt = f"""
-这是报告模板：
+请帮我生成一份党小组会议报告，模板如下：
 
 1、会议纪要（主要记录会议的流程、内容、发言、讨论情况等）
 （1）会议开场
@@ -26,17 +23,23 @@ XXX：XXX。
 XXX：XXX。
 XXX：XXX。
 XXX：XXX。
+"""
 
-主持人是{leader}，请你将以下内容分为{num_people}人份填写，这些人是：{peoples}。
+query_prompt = f"""
+本次党小组会议的主题是：{report_topic}
+
+主持人是{leader}，参会人员有：{peoples}，请你将以下报告内容按照参会人员分成{num_people}份发言（每个人的发言字数在100-200字之间），并根据模板输出对应的党小组会议报告。
 
 {report_content}
 """
 
 if __name__ == "__main__":
-    if len(sys.argv) > 2 or len(sys.argv) < 1:
-        print(f"Usage: {sys.argv[0]} <system prompt>")
-        sys.exit(1)
-    if len(sys.argv) == 2:
-        system_prompt = sys.argv[1]
+    if len(sys.argv) == 1:
+        q = QueryChat()
+        q.insert_system_prompt(system_prompt)
+        response = q.query(query_prompt)
+        assert isinstance(response, str)
+        print(f"response: {response}")
     else:
-        pass
+        print(f"Usage: {sys.argv[0]} <system prompt>")
+        sys.exit(-1)
